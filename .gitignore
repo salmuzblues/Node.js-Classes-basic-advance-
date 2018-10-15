@@ -1,5 +1,5 @@
 
-perating Systems
+#--Operating Systems
 # OS X
 # https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
 .DS_Store
@@ -15,3 +15,5 @@ Icon
 .Spotlight-V100
 .Trashes
 .idea
+bower_components
+node_modules
