@@ -17,36 +17,31 @@ let salarios = [{
     id:2,
     salario: 5000
 }];
-// promise form getEmpleado
-let getEmpleado = (id) => {
-    //return a promise and inside the Promises has tw callbacks
-    return new Promise((resolve,reject) => {
-        //find the employee
-        let empleadoBD = empleados.find((empleado) => empleado.id === id);
+// Async  form getEmpleado
+let getEmpleado = async(id) => {
+
+    //find the employee
+    let empleadoBD = empleados.find((empleado) => empleado.id === id);
         // create a condition if it exits an employee.
         if(!empleadoBD){
-            reject(`this employee does not exist db with this ${id}`);
+            throw new Error(`this employee does not exist db with this ${id}`);
         }else {
-            resolve(empleadoBD);
+            return empleadoBD;
         }
-    });
 };
 
 // promise from getSalario
-let getSalary = (empleado) => {
-
-    return new Promise((resolve, reject) => {
-
-        let  salaryEmpl = salarios.find((salryEmpl) => salryEmpl.id === empleado.id);
+let getSalary = async (empleado) => {
+    // find salaryEmple
+    let  salaryEmpl = salarios.find((salryEmpl) => salryEmpl.id === empleado.id);
         if(!salaryEmpl){
-            reject(`it did not find  the salary for the user ${empleado.name}`);
+            throw new Error(`it did not find  the salary for the user ${empleado.name}`);
         }else{
-            resolve ({
+            return  {
                 name: empleado.name,
                 salario: salaryEmpl.salario,
                 id: empleado.id
-            })}
-    });
+            }}
 };
 
 // retrieve information
@@ -59,7 +54,7 @@ let getInformation = async (id) => {
     return`${empleado.name} tiene un salario de ${respSalary.salario} con un ID: ${respSalary.id}`;
 };
 
-getInformation(6).then(message => console.log(message))
+getInformation(2).then(message => console.log(message))
                   .catch(err => console.log(err));
 
 
