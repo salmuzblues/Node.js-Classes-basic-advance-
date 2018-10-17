@@ -70,6 +70,7 @@ getEmpleado(3).then(empleado => {
     .then(resp => {
     console.log(`El usuario ${resp.name} tiene un salario ${resp.salario} con un ID: ${resp.id}`);
 })
+    // this catch is catching two errs from getEmpleado and getSalary 
     .catch(err =>{
         console.log(err);
     });
