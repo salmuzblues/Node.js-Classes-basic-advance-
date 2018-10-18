@@ -1,8 +1,21 @@
 
 const fs = require('fs');
 
+let listarTabla = (base, limite) => {
+    return new Promise((resolve, reject) =>{
+       let data = '';
+       for (let i = 1; i <= limite; i++){
+           data += `${ base } * ${ i } = ${ base * i }\n`;
+       }
+       if(!data)
+           reject('It does not contain data');
+       else
+           resolve(data);
+    });
+};
 
-let crearArchivo = (base) => {
+
+let crearArchivo = (base, limite = 10) => {
 
    return new Promise ((resolve,reject) => {
 
@@ -12,7 +25,7 @@ let crearArchivo = (base) => {
        }
 
        let data = '';
-       for (let i = 1; i <= 10; i++){
+       for (let i = 1; i <= limite; i++){
 
            data +=`${ base } * ${ i } = ${ base * i }\n`;
        }
@@ -30,5 +43,6 @@ let crearArchivo = (base) => {
 
 //Now we have to export global
  module.exports = {
-    crearArchivo
+    crearArchivo,
+     listarTabla
 };
