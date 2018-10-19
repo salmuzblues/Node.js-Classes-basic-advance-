@@ -5,7 +5,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-.idea/
+.idea/workspace.xml
 # Icon must ends with two \r.
 Icon
  
@@ -16,4 +16,5 @@ Icon
 .Trashes
 .idea
 bower_components
-node_modules
+node_modules/
+tabla-data/*.txt

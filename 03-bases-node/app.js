@@ -1,43 +1,20 @@
 // calling method.
 const { crearArchivo, listarTabla } = require('./multiplicar/multiplicarApp.js');
-const argv = require('yargs')
-                    .command('listar', 'print by console  a table o multiply',{
-                     base: {
-                      demand: true,
-                      alias: 'b'
-                     },
-                      limite:{
-                      alias: 'l',
-                      default: 10
-                      }
-                    })
-                   .command('crear', 'create file txt about tables of multiply', {
-                       base: {
-                           demand: true,
-                           alias: 'b'
-                       },
-                       limite:{
-                           alias: 'l',
-                           default: 10
-                       }
-                   })
-                    .help()
-                    .argv;
+const argv = require('./config/yargs-config.js').argv;
+const colors = require('colors/safe');
 
+//console.log(argv);
 
-
-console.log(argv);
-
-//let comando = argv._[0]; listar es el indice 0{ _: [ 'listar' ], base: 3, b: 3, limite: 3, l: 3, '$0': 'app' }
+let comando = argv._[0]; //listar es el indice 0{ _: [ 'listar' ], base: 3, b: 3, limite: 3, l: 3, '$0': 'app' }
 
 switch (comando){
 
     case 'listar':
-        listarTabla(argv.base, argv.limite).then(archivo => console.log(`Tabla del ${argv.base}\n${archivo}`))
+        listarTabla(argv.base, argv.limite).then(archivo => console.log(`Tabla del ${argv.base}\n`))
             .catch(e => console.log(e));
      break;
     case 'crear':
-        crearArchivo(argv.base, argv.limite).then(archivo => console.log(`Archivo creado ${archivo}`))
+        crearArchivo(argv.base, argv.limite).then(archivo => console.log(`Archivo creado: `, colors.green(archivo)))
             .catch(e => console.log(e));
         break;
     default:
