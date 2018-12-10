@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const getPlace = async(direccion) => {
 
- let resp = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${ direccion }&key=AIzaSyDzbQ_553v-n8QNs2aafN9QaZbByTyM7gQ`)
+ let resp = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${ direccion }&key=AIzaSyDzbQ_553v-n8QNs2aafN9QaZbByTyM7gQ`);
    //this is for the status is wrong name
     if (resp.data.status === 'ZERO_RESULTS'){
       throw new Error(`No hay resultados de la dirección indicada ${ direccion }`);

@@ -1,6 +1,7 @@
 
 const { getPlace }   = require('./lugar/lugar.js')
 const { argv } = require('./config/yargs-conf');
+const { getClima } = require('./clima/clima');
 
 console.log(argv.direccion);
 
@@ -13,8 +14,12 @@ The encodeURI() function encodes a Uniform Resource Identifier (URI)
  (will only be four escape sequences for characters composed of two "surrogate" characters).
 let encodeUrl = encodeURI(argv.direccion);
 */
-
+/*
 getPlace( argv.direccion )
           .then( resp => {
              console.log(resp);
            }).catch( e => console.log('ERROR!', e));
+     */
+
+getClima(-12.0463731,  -77.042754).then(temp => console.log(temp))
+                                    .catch(e => console.log('ERROR!', e));
