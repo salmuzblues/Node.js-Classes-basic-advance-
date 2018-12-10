@@ -21,7 +21,7 @@ const getPlace = async(direccion) => {
     return {
      direc: direcLoct,
      lng: cordLng,
-     latd: cordLat
+     lat: cordLat
     }
 };
 

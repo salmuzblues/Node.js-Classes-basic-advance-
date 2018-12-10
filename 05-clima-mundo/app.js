@@ -14,12 +14,32 @@ The encodeURI() function encodes a Uniform Resource Identifier (URI)
  (will only be four escape sequences for characters composed of two "surrogate" characters).
 let encodeUrl = encodeURI(argv.direccion);
 */
+
+// two methods jus one
+
+let getInfo = async (Direccion) => {
+   try {
+       let coors = await  getPlace(Direccion);
+       let temp = await  getClima(coors.lat, coors.lng);
+
+       return `El clima en ${ coors.direc } es de ${ temp } Celsius`;
+   }catch (e) {
+       return `No se pudo determinar la temperatura de ${ Direccion}`;
+   }
+};
+
+
+getInfo(argv.direccion).then (message => {console.log(message)})
+
+
+                        .catch(e => console.log(e))
 /*
+this way is more long
 getPlace( argv.direccion )
           .then( resp => {
              console.log(resp);
            }).catch( e => console.log('ERROR!', e));
-     */
+
 
 getClima(-12.0463731,  -77.042754).then(temp => console.log(temp))
-                                    .catch(e => console.log('ERROR!', e));
+ */                                   .catch(e => console.log('ERROR!', e));
