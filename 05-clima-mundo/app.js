@@ -42,4 +42,4 @@ getPlace( argv.direccion )
 
 
 getClima(-12.0463731,  -77.042754).then(temp => console.log(temp))
- */                                   .catch(e => console.log('ERROR!', e));
+                                .catch(e => console.log('ERROR!', e)); */
