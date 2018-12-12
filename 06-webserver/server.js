@@ -1,11 +1,30 @@
 const express = require('express');
 const app = express();
+const hbs = require('hbs');
+// importando los metodos helper para que funcionen en este file.js
+require('./hbs/helpers');
 
 // middleware es una instrucción o callback que se va a ejecutar siempre que url pida
 app.use(express.static( __dirname  + '/public'));
 
-/*
+// exspress HBS engine
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
+
+// go to Home
 app.get('/', function (req, res) {
+
+    res.render('Home', {
+        nombre: 'Juan',
+    });
+});
+    app.get('/about', function (req, res) {
+
+        res.render('about');
+    });
+
+
+  /*
    // res.send('Hello world');
     let salida = {
         nombre: 'Alex',
@@ -14,7 +33,8 @@ app.get('/', function (req, res) {
     };
 
     res.send(salida);
-}); */
+    */
+
 app.listen(3000, () => {
-    console.log('Escichando peticiones en el puerto numero 3000');
+    console.log('Escuchando peticiones en el puerto numero 3000');
 });
