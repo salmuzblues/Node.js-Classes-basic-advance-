@@ -11,5 +11,6 @@ hbs.registerHelper('capitalize', (text) => {
     palabras.forEach((palabra, idx) =>{
         palabras[idx] = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
     });
+    // adjunta de nuevo las palabras con el espacio
     return palabras.join(' ');
 });
