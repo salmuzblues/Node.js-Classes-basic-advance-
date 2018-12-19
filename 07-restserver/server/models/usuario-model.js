@@ -11,7 +11,7 @@ let rolesValidos = {
 
 let usuarioSchema = new Schema({
 
-    nombre:{
+    nombre: {
        type: String,
        required:[ true , 'El nombre es necesario']
    },
@@ -24,22 +24,22 @@ let usuarioSchema = new Schema({
        type: String,
         required: [ true, 'Su contraseña es necesaria']
     },
-    img:{
+    img: {
         type: String,
         required: false
     },
-    role:{
+    role: {
        type:String,
         default: 'USER_ROLE',
         // validación de ROLE just accepting USER_ROLE and ADMIN_ROLE.
         // first to make a array just accepting of vaildations ROLES.
         enum: rolesValidos
     },
-    estado:{
+    estado: {
        type: Boolean,
         default:true
     },
-    google:{
+    google: {
        type: Boolean,
         default: false
     }
@@ -54,7 +54,7 @@ usuarioSchema.methods.toJSON = function () {
     delete userObject.password;
     return userObject;
 };
-
-usuarioSchema.plugin(uniqueValidator, { message: '{PATH}, debee ser unico'});
+// this is working  with the tag unique//
+usuarioSchema.plugin(uniqueValidator, { message: '{PATH}, debe ser unico'});
 
 module.exports =  mongoose.model('Usuario', usuarioSchema);

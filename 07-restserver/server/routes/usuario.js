@@ -2,10 +2,46 @@
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
+const  _ = require('underscore');
 const Usuario = require('../models/usuario-model');
 // making first direction
 app.get('/', (req, res) => res.json('home alex'));
-app.get('/usuario', (req, res) => res.json(' Get alex'));
+
+
+//  retrieve  all Users
+app.get('/usuario', (req, res) => {
+
+    // from what number of users you require to skip
+    let desde = req.query.desde - 1 || 0;
+    desde = Number(desde);
+
+    // naming a limit of users lists
+    let limite = req.query.limite || 5;
+    limite = Number(limite);
+
+      Usuario.find({ estado: true })
+          .skip(desde) // this for obtain just grups and then skip
+          .limit(limite) // how many fields you want
+          .exec((err, usuarios) => { // this for executing.
+
+              if (err) {
+                  return res.status(400).json({
+                      ok: false,
+                      err
+                  })
+              }
+              // para el conteo de registros
+
+              Usuario.count({ estado: true }, (err, conteo) => {
+
+                  res.json({
+                      ok: true,
+                      usuarios,
+                      Cantidad: `${conteo} registros`
+                  })
+              })
+          })// End exec
+});
 
 // Create Register
 app.post('/usuario', (req, res) => {
@@ -49,10 +85,10 @@ app.post('/usuario', (req, res) => {
 // modify register
 app.put('/usuario/:id', (req, res) => {
     let id = req.params.id;
-    let body = req.body;
+    //  with underscore (plugin) we can update some fields those we want.
+    let body =  _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
 
-    Usuario.findByIdAndUpdate(id, body, { new: true },  (err, usuarioDB) => {
-
+    Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
 
         if (err){
             return res.status(400).json({  // BAD REQUESTE 400
@@ -60,7 +96,6 @@ app.put('/usuario/:id', (req, res) => {
                 err
             });
         }
-
         res.json({
             ok: true,
             usuario: usuarioDB
@@ -68,7 +103,52 @@ app.put('/usuario/:id', (req, res) => {
     })
 });
 
+// delete USER
+app.delete('/usuario/:id', (req, res) =>{
 
-app.delete('/usuario', (req, res) => res.json(' delete alex'));
+    let id = req.params.id;
+    let changeStatus = {
+        estado: false
+    };
+
+    Usuario.findByIdAndUpdate(id, changeStatus, (err, userStatusFalse) => {
+
+    // this is for something happens
+        if (err){
+            return res.status(400).json({  // BAD REQUESTE 400
+                ok: false,
+                err
+            });
+        }
+    // this is results
+        res.json({
+            ok: true,
+            usuario: userStatusFalse
+        });
+
+    })
+
+    /*
+    Usuario.findByIdAndDelete(id, (err, userDelete) =>{
+    // this is for some errors
+        if (err){
+            return res.status(400).json({  // BAD REQUESTE 400
+                ok: false,
+                err
+            });
+        }
+
+    // this is when the user is not in register list
+        if (!userDelete){
+            return res.status(400).json({  // BAD REQUESTE 400
+                ok: false,
+                err: {
+                    message: 'Usuario no encontrado'
+                }
+            });
+        }
+    })// End delete
+    */
+});
 
 module.exports =  app;

@@ -18,7 +18,7 @@ app.listen(process.env.PORT, () => {
    console.log(`It is running the server on port ${ process.env.PORT }`);
 });
 // Conexion to data base
-mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true ,  useCreateIndex: true,}, (err, res) => {
     if (err)
         throw err;
     else
