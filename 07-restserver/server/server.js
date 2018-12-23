@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-//import all about User.
-app.use(require('./routes/usuario'));
+//configuración global de rutas
+app.use(require('./routes/index'));
 
 //this for recognize if we use local o web URL
 app.listen(process.env.PORT, () => {

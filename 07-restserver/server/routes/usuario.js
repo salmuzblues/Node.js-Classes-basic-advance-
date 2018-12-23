@@ -4,12 +4,22 @@ const app = express();
 const bcrypt = require('bcrypt');
 const  _ = require('underscore');
 const Usuario = require('../models/usuario-model');
+const { verificarToken, verificarAdmin_Role } = require('../middlewares/autenticacion');
 // making first direction
 app.get('/', (req, res) => res.json('home alex'));
 
 
 //  retrieve  all Users
-app.get('/usuario', (req, res) => {
+app.get('/usuario', verificarToken, (req, res) => {
+
+   /* // retrieving all information about usuario o some data.
+    return res.json({
+    // req.usario viene del verificarToken
+       usuario: req.usuario,
+       nombre: req.usuario.nombre,
+        email: req.usuario.email
+    });
+*/
 
     // from what number of users you require to skip
     let desde = req.query.desde - 1 || 0;
@@ -44,7 +54,7 @@ app.get('/usuario', (req, res) => {
 });
 
 // Create Register
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [ verificarToken, verificarAdmin_Role ], (req, res) => {
     let body = req.body;
 
     // creating objects :
@@ -83,7 +93,7 @@ app.post('/usuario', (req, res) => {
 });
 
 // modify register
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [ verificarToken, verificarAdmin_Role ], (req, res) => {
     let id = req.params.id;
     //  with underscore (plugin) we can update some fields those we want.
     let body =  _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -104,7 +114,7 @@ app.put('/usuario/:id', (req, res) => {
 });
 
 // delete USER
-app.delete('/usuario/:id', (req, res) =>{
+app.delete('/usuario/:id', [ verificarToken, verificarAdmin_Role ], (req, res) =>{
 
     let id = req.params.id;
     let changeStatus = {
