@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt');
 const  _ = require('underscore');
 const Usuario = require('../models/usuario-model');
 const { verificarToken, verificarAdmin_Role } = require('../middlewares/autenticacion');
-// making first direction
-app.get('/', (req, res) => res.json('home alex'));
-
 
 //  retrieve  all Users
 app.get('/usuario', verificarToken, (req, res) => {
@@ -160,5 +157,7 @@ app.delete('/usuario/:id', [ verificarToken, verificarAdmin_Role ], (req, res) =
     })// End delete
     */
 });
+
+
 
 module.exports =  app;
