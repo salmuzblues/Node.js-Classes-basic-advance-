@@ -14,7 +14,7 @@ VENCIMIENTO DEL TOKEN
 24 HORAS *
 30 DIAS
  */
-process.env.CADUCIDAD_TOKEN =  60*60*24*30;
+process.env.CADUCIDAD_TOKEN = '48h';
 /*
 ======================
 SEED DE AUTENTICACION
@@ -28,7 +28,8 @@ Google Client ID
 =============
  */
 
-//process.env.CLIENT_ID = process.env.CLIENT_ID;
+process.env.CLIENT_ID = process.env.CLIENT_ID || '673317804421-u5am3kpne3q55jse3o208bonvmdh0lgh.apps.googleusercontent.com';
+/*
 ==============
  ENTORNO (Desarrollo o Producción)
 =============

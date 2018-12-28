@@ -65,7 +65,7 @@ app.post('/usuario', [ verificarToken, verificarAdmin_Role ], (req, res) => {
     // saving all data to mongoDb
     usuario.save((err, usuarioDB) =>{
      if (err){
-         return res.status(400).json({  // BAD REQUESTE 400
+         return res.status(500).json({// internar server error
             ok: false,
             err
          });
