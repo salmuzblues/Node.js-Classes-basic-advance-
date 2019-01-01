@@ -51,9 +51,30 @@ let verificarAdmin_Role = (req, res, next) => {
         });
     }
 };
+/*
+==================================
+VERIFICAR  TOKEN IMAGE
+==================================
+ */
+let verificaTokenImg = (req, res, next) => {
+  let token = req.query.token;
 
+    jwt.verify( token, process.env.SEED, (err, decoded) => {
+        // catching errors
+        if(err){
+            return res.status(401).json({ // Unauthorized
+                ok: false,
+                err: {
+                    message: 'Token invalido'}
+            });
+        }
+        req.usuario = decoded.usuario;
+        next();
+    });
+};
 
 module.exports = {
     verificarToken,
-    verificarAdmin_Role
+    verificarAdmin_Role,
+    verificaTokenImg
 };

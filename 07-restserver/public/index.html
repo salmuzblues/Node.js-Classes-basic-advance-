@@ -7,13 +7,15 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
+ <!-- <img src="http://localhost:3000/imagen/usuarios/5c1a5ec73981e30b23c06ed6-102.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZXN0YWRvIjp0cnVlLCJnb29nbGUiOmZhbHNlLCJfaWQiOiI1YzFhNWVjNzM5ODFlMzBiMjNjMDZlZDYiLCJub21icmUiOiJ0ZXN0MSIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwiX192IjowLCJpbWciOiI1YzFhNWVjNzM5ODFlMzBiMjNjMDZlZDYtMTAyLmpwZyJ9LCJpYXQiOjE1NDYzNzkxMzMsImV4cCI6MTU0NjU1MTkzM30.GCTvKVGjNVz8GrN2l0Z0HIcLo16EJiSxdbwyxMrqcaQ" alt=""> -->  
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 <a href="#" onclick="signOut();">Sign out</a>
 
  <script>
      function onSignIn(googleUser) {
-         var profile = googleUser.getBasicProfile();
+             var profile = googleUser.getBasicProfile();
          console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
          console.log('Name: ' + profile.getName());
          console.log('Image URL: ' + profile.getImageUrl());
