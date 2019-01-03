@@ -1,4 +1,6 @@
 
+/** PARTE DEL CLIENTE o Front End **/
+
 var socket = io();
 socket.on('connect', function(){
     console.log('Conectado al servidor');
@@ -16,5 +18,5 @@ socket.emit('enviarMensaje', {
 });
 // escuchando información desde el servidor emitiendo.
 socket.on('enviarMensaje', (message) => {
-    console.log('Servidor: ', message);
+        console.log('Servidor: ', message);
 });

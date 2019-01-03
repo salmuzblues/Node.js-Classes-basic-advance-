@@ -1,6 +1,7 @@
 
 const { io } = require('../server');
 
+/**   PARTE DEL SERVER **/
 io.on('connection', (client) => {
     console.log('Usuario conectado');
     client.emit('enviarMensaje', {
